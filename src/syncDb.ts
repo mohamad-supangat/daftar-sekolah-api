@@ -33,7 +33,7 @@ export default function syncDb(
       WHERE
         nama LIKE '%${searchQuery}%'
         OR alamat LIKE '%${searchQuery}%'
-        OR nps LIKE '%${searchQuery}%'
+        OR npsn LIKE '%${searchQuery}%'
         OR status LIKE '%${searchQuery}%'
       `,
       )
