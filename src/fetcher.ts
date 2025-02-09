@@ -7,9 +7,9 @@ export default async function fetcher(
 ): Promise<DataResult[]> {
   try {
     const response = await fetch(
-      `https://referensi.data.kemdikbud.go.id/residu/carisekolah/${searchQuery}`,
+      `https://daftarsekolah.net/cari?q=${searchQuery}`,
       {
-        credentials: "include",
+        credentials: "omit",
         headers: {
           "User-Agent":
             "Mozilla/5.0 (X11; Linux x86_64; rv:133.0) Gecko/20100101 Firefox/133.0",
@@ -24,31 +24,26 @@ export default async function fetcher(
           "Sec-Fetch-User": "?1",
           Priority: "u=0, i",
         },
-        referrer:
-          "https://referensi.data.kemdikbud.go.id/residu/carisekolah/ajibarang",
+        referrer: "https://daftarsekolah.net/",
         method: "GET",
         mode: "cors",
       },
     ).then(async (x) => await x.text());
 
+    // console.log(response);
     const $ = cheerioLoad(response);
 
     const keys = ["no", "nama", "npsn"];
     let results: DataResult[] = [];
 
-    const tr = $("tr");
+    const tr = $(".si");
 
     if (!!tr.length) {
       tr.each((number, row) => {
-        if (number === 0) return;
-
-        const td = $(row).find("td");
-        const result: DataResult = {};
-
-        td.each((index, data) => {
-          const value = $(data).text().trim();
-          result[keys[index]] = value;
-        });
+        const result: DataResult = {
+          nama: $(row).find("h2").text(),
+          alamat: $(row).find(".sd p").text(),
+        };
 
         if (result.nama) {
           results.push({
@@ -57,8 +52,6 @@ export default async function fetcher(
           });
         }
       });
-
-      console.log(results);
 
       return results;
     }
