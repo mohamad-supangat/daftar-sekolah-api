@@ -49,6 +49,7 @@ export default async function fetcher(
           results.push({
             nama: result.nama,
             npsn: result.npsn,
+            alamat: result.alamat,
           });
         }
       });
