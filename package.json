@@ -4,7 +4,9 @@
   "description": "REST API Daftar Sekolah Indonesia",
   "main": "src/index.js",
   "scripts": {
-    "dev": "bun --watch src/index.ts",
+    "build:vercel": "bun-vercel ./src/main.ts",
+    "build": "bun build ./src/main.ts",
+    "dev": "bun --watch ./src/index.ts",
     "start": "node src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,5 +19,8 @@
     "bunorm": "^0.0.1",
     "cheerio": "^1.0.0",
     "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "bun-vercel": "^1.0.0-alpha.5"
   }
 }

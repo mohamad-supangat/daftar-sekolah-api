@@ -1,4 +1,4 @@
-export type DataResult = {
+export type Sekolah = {
   nama?: string;
   status?: string;
   npsn?: string;
